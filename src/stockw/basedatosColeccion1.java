@@ -76,7 +76,7 @@ public class basedatosColeccion1 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtref = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        talla = new javax.swing.JComboBox<>();
+        talla = new javax.swing.JComboBox<String>();
         jLabel6 = new javax.swing.JLabel();
         txtunidades = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -144,7 +144,7 @@ public class basedatosColeccion1 extends javax.swing.JFrame {
 
         jLabel4.setText("Talla");
 
-        talla.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XS", "S", "M", "L", "XL" }));
+        talla.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "XS", "S", "M", "L", "XL" }));
 
         jLabel6.setText("Unidades");
 

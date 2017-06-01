@@ -18,7 +18,8 @@ public class conectar {
     public Connection conexion(){
          try{
           Class.forName("org.sqlite.JDBC");
-          Connection con=DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Araceli\\Documents\\NetBeansProjects\\StockW\\Stock.sqlite");
+          Connection con=DriverManager.getConnection("jdbc:sqlite:F:\\Marta\\CD\\Prox3Av\\Stock.sqlite");
+          //Connection con=DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Araceli\\Documents\\NetBeansProjects\\StockW\\Stock.sqlite");
           JOptionPane.showMessageDialog(null,"Conexión establecida");
           return con;
       }  catch(Exception e){
