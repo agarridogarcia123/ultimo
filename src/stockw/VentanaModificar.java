@@ -180,7 +180,7 @@ public class VentanaModificar extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +208,7 @@ public class VentanaModificar extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 571, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btngrabar)
                     .addComponent(borrar)
@@ -222,22 +222,46 @@ public class VentanaModificar extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 60, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txttipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txttipoActionPerformed
+    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
+        try {
+            PreparedStatement pst = cn.prepareStatement("UPDATE prendas SET tipo='"+txttipo.getText()+"',referencia='"+txtref.getText()+"',unidades='"+txtunidades.getText()+"',precio='"+txtprecio.getText()+"' WHERE referencia='"+txtref.getText()+"'");
+            pst.executeUpdate();
+            mostrardatos("");
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+    }//GEN-LAST:event_actualizarActionPerformed
+
+    private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
+        int fila = tabla.getSelectedRow();
+        String borrar="";
+        borrar=tabla.getValueAt(fila, 1).toString();
+
+        try {
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM prendas WHERE referencia='"+borrar+"'");
+            pst.executeUpdate();
+            mostrardatos("");
+
+        }catch (Exception e) {
+        }
+    }//GEN-LAST:event_borrarActionPerformed
 
     private void btngrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngrabarActionPerformed
-          try {
+        try {
             PreparedStatement pst = cn.prepareStatement("INSERT INTO prendas VALUES (?,?,?,?,?)");
             pst.setString(1, txttipo.getText());
             pst.setString(2, txtref.getText());
@@ -246,33 +270,18 @@ public class VentanaModificar extends javax.swing.JFrame {
             pst.setFloat(5,Float.parseFloat(txtprecio.getText()));
             pst.executeUpdate();
             mostrardatos("");
+            txttipo.setText("");
+            txtref.setText("");
+            txtunidades.setText("");
+            txtprecio.setText("");
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }
     }//GEN-LAST:event_btngrabarActionPerformed
 
-    private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
-         int fila = tabla.getSelectedRow();
-        String borrar="";
-        borrar=tabla.getValueAt(fila, 1).toString();
-    
-    try {
-        PreparedStatement pst = cn.prepareStatement("DELETE FROM prendas WHERE referencia='"+borrar+"'");
-        pst.executeUpdate();
-        mostrardatos("");
-    }catch (Exception e) {
-    }
-    }//GEN-LAST:event_borrarActionPerformed
-
-    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
-         try {
-            PreparedStatement pst = cn.prepareStatement("UPDATE prendas SET tipo='"+txttipo.getText()+"',referencia='"+txtref.getText()+"',unidades='"+txtunidades.getText()+"',precio='"+txtprecio.getText()+"' WHERE referencia='"+txtref.getText()+"'");
-            pst.executeUpdate();
-            mostrardatos("");
-        } catch (Exception e) {
-            System.out.print(e.getMessage());
-        }
-    }//GEN-LAST:event_actualizarActionPerformed
+    private void txttipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttipoActionPerformed
 
     /**
      * @param args the command line arguments

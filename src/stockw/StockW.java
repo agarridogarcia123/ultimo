@@ -15,11 +15,7 @@ public class StockW {
     public static void main(String[] args) {
         VentanaInicio ven=new VentanaInicio();
         ven.setVisible(true);
-//         VentanaModificar ven2=new VentanaModificar();
-//         ven2.setVisible(true);
-//          VentanaInicio ven=new VentanaInicio();
-//           VentanaInicio ven=new VentanaInicio();
-        
+
     }
     
 }
