@@ -26,10 +26,10 @@ conectar cc= new conectar();
      */
     public VentanaClientes() {
         initComponents();
-         mostrardatos("");
+         mostrarstock("");
          setVisible(true);
     }
-void mostrardatos(String valor){
+void mostrarstock(String valor){
     DefaultTableModel modelo= new DefaultTableModel();
     modelo.addColumn("Empresa");
     modelo.addColumn("CIF");
@@ -113,16 +113,6 @@ void mostrardatos(String valor){
         });
 
         jLabel1.setText("Nombre empresa:");
-
-        txtempresa.setText("jTextField2");
-
-        txtcif.setText("jTextField2");
-
-        txtemail.setText("jTextField2");
-
-        txttelefono.setText("jTextField2");
-
-        txtpago.setText("jTextField2");
 
         añadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BoGrabar.png"))); // NOI18N
         añadir.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +228,7 @@ void mostrardatos(String valor){
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaClientesActionPerformed
-         mostrardatos(txtbuscar.getText());
+         mostrarstock(txtbuscar.getText());
     }//GEN-LAST:event_buscaClientesActionPerformed
 
     private void añadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirActionPerformed
@@ -250,7 +240,7 @@ void mostrardatos(String valor){
             pst.setString(4,txttelefono.getText());
             pst.setString(5, txtpago.getText());
             pst.executeUpdate();
-            mostrardatos("");
+            mostrarstock("");
             txtempresa.setText("");
             txtcif.setText("");
             txtemail.setText("");
@@ -270,7 +260,7 @@ void mostrardatos(String valor){
         try {
             PreparedStatement pst = cn.prepareStatement("DELETE FROM clientes WHERE cif='"+borrar+"'");
             pst.executeUpdate();
-            mostrardatos("");
+            mostrarstock("");
 
         }catch (Exception e) {
         }

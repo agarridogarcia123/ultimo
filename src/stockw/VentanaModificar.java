@@ -27,11 +27,11 @@ public class VentanaModificar extends javax.swing.JFrame {
      */
     public VentanaModificar() {
         initComponents();
-         mostrardatos("");
+         mostrarstock("");
          setVisible(true);
         
     }
-     void mostrardatos(String valor){
+     void mostrarstock(String valor){
     DefaultTableModel modelo= new DefaultTableModel();
     modelo.addColumn("Tipo");
     modelo.addColumn("Referencia");
@@ -250,7 +250,7 @@ public class VentanaModificar extends javax.swing.JFrame {
         try {
             PreparedStatement pst = cn.prepareStatement("UPDATE prendas SET tipo='"+txttipo.getText()+"',referencia='"+txtref.getText()+"',unidades='"+txtunidades.getText()+"',precio='"+txtprecio.getText()+"' WHERE referencia='"+txtref.getText()+"'");
             pst.executeUpdate();
-            mostrardatos("");
+            mostrarstock("");
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }
@@ -264,7 +264,7 @@ public class VentanaModificar extends javax.swing.JFrame {
         try {
             PreparedStatement pst = cn.prepareStatement("DELETE FROM prendas WHERE referencia='"+borrar+"'");
             pst.executeUpdate();
-            mostrardatos("");
+            mostrarstock("");
 
         }catch (Exception e) {
         }
@@ -279,7 +279,7 @@ public class VentanaModificar extends javax.swing.JFrame {
             pst.setInt(4,Integer.parseInt(txtunidades.getText()));
             pst.setFloat(5,Float.parseFloat(txtprecio.getText()));
             pst.executeUpdate();
-            mostrardatos("");
+            mostrarstock("");
             txttipo.setText("");
             txtref.setText("");
             txtunidades.setText("");

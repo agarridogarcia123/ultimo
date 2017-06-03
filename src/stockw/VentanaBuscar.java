@@ -24,9 +24,9 @@ public class VentanaBuscar extends javax.swing.JFrame {
      */
     public VentanaBuscar() {
         initComponents();
-        mostrardatos("");
+        mostrarstock("");
     }
- void mostrardatos(String valor){
+ void mostrarstock(String valor){
     DefaultTableModel modelo= new DefaultTableModel();
     modelo.addColumn("Tipo");
     modelo.addColumn("Referencia");
@@ -152,7 +152,7 @@ public class VentanaBuscar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        mostrardatos(txtbuscar.getText());
+        mostrarstock(txtbuscar.getText());
     }//GEN-LAST:event_buscarActionPerformed
 
     /**

@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,17 +21,20 @@ import javax.swing.table.DefaultTableModel;
  * @author chisco
  */
 public class VentanaVender extends javax.swing.JFrame {
+    
+     DefaultTableModel venta= new DefaultTableModel();
 
     /**
      * Creates new form VentanaVender
      */
     public VentanaVender() {
-        initComponents();
-         mostrardatos("");
+       initComponents();
+       iniciarTabla();
+       mostrarstock("");
        setVisible(true);
        this.dispose();
     }
- void mostrardatos(String valor){
+ void mostrarstock(String valor){
     DefaultTableModel modelo= new DefaultTableModel();
     modelo.addColumn("Tipo");
     modelo.addColumn("Referencia");
@@ -67,6 +71,46 @@ public class VentanaVender extends javax.swing.JFrame {
         }
     
     }
+ public void iniciarTabla(){
+     venta.addColumn("Tipo");
+    venta.addColumn("Referencia");
+    venta.addColumn("Talla");
+    venta.addColumn("Unidades");
+    venta.addColumn("Precio");
+    tabla2.setModel(venta);
+ }
+ void mostrarventa(String referencia, int unidades){
+
+    String sql="";
+    if(referencia.equals(""))
+    {
+        sql="SELECT * FROM prendas";
+    }
+    else{
+        sql="SELECT * FROM prendas WHERE referencia='"+referencia+"'";
+    }
+    
+    
+    String [] datos = new String [5];
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                datos [0]=rs.getString(1);
+                datos[1]=rs.getString(2);
+                datos[2]=rs.getString(3);
+                datos[3]=String.valueOf(unidades);
+                datos[4]=String.valueOf(rs.getFloat(5));
+                
+                venta.addRow(datos);
+            }
+           
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(basedatosColeccion1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,6 +128,9 @@ public class VentanaVender extends javax.swing.JFrame {
         btnvender = new javax.swing.JButton();
         btnenviar = new javax.swing.JButton();
         excel = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabla2 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,31 +157,51 @@ public class VentanaVender extends javax.swing.JFrame {
 
         excel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOexcel.png"))); // NOI18N
 
+        tabla2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(tabla2);
+
+        jLabel2.setText("factura:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel1)
-                        .addGap(101, 101, 101)
-                        .addComponent(txtref, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(343, 343, 343)
-                        .addComponent(btnvender, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(103, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnenviar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
-                .addComponent(excel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnenviar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(excel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(101, 101, 101)
+                                .addComponent(txtref, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnvender, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,15 +213,19 @@ public class VentanaVender extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(jLabel1)))
-                .addGap(58, 58, 58)
-                .addComponent(btnvender)
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnvender)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnenviar)
                     .addComponent(excel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,13 +245,16 @@ public class VentanaVender extends javax.swing.JFrame {
     private void btnvenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvenderActionPerformed
           try {
               int unid=Integer.parseInt(JOptionPane.showInputDialog("Inserta cuantas quieres vender"));
-            PreparedStatement pst = cn.prepareStatement("UPDATE prendas SET unidades ==unidades-"+unid+ " where referencia=='"+txtref.getText()+"'");
-            
+              String ref=txtref.getText();
+            PreparedStatement pst = cn.prepareStatement("UPDATE prendas SET unidades ==unidades-"+unid+ " where referencia=='"+ref+"'");
             pst.executeUpdate();  
-            mostrardatos("");
+            mostrarstock("");
+            mostrarventa(ref,unid);
+            
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }
+          
     }//GEN-LAST:event_btnvenderActionPerformed
 
     /**
@@ -223,9 +297,12 @@ public class VentanaVender extends javax.swing.JFrame {
     private javax.swing.JButton btnvender;
     private javax.swing.JButton excel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tabla;
+    private javax.swing.JTable tabla2;
     private javax.swing.JTextField txtref;
     // End of variables declaration//GEN-END:variables
   conectar cc= new conectar();
