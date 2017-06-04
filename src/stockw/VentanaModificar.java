@@ -273,7 +273,7 @@ public class VentanaModificar extends javax.swing.JFrame {
     private void btngrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngrabarActionPerformed
         try {
             PreparedStatement pst = cn.prepareStatement("INSERT INTO prendas VALUES (?,?,?,?,?)");
-            pst.setString(1, txttipo.getText());
+            pst.setString(1, txttipo.getText().toLowerCase());
             pst.setString(2, txtref.getText());
             pst.setString(3, talla.getSelectedItem().toString());
             pst.setInt(4,Integer.parseInt(txtunidades.getText()));
