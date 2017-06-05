@@ -13,14 +13,26 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import jxl.write.biff.File;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.*;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -39,7 +51,9 @@ public class VentanaVender extends javax.swing.JFrame {
        mostrarstock("");
        setVisible(true);
        this.dispose();
+ 
     }
+  
  void mostrarstock(String valor){
     DefaultTableModel modelo= new DefaultTableModel();
     modelo.addColumn("Tipo");
@@ -78,6 +92,9 @@ public class VentanaVender extends javax.swing.JFrame {
     
     }
  void filtrarstock(String tipo){
+     
+     
+ 
     DefaultTableModel modelo= new DefaultTableModel();
     modelo.addColumn("Tipo");
     modelo.addColumn("Referencia");
@@ -178,11 +195,16 @@ public class VentanaVender extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         buscar = new javax.swing.JButton();
         txttipo = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        botonCliente = new javax.swing.JButton();
-        txtclientes = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        desde = new javax.swing.JTextField();
+        destinatario = new javax.swing.JTextField();
+        asunto = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txt = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StockWarehouse");
@@ -197,6 +219,11 @@ public class VentanaVender extends javax.swing.JFrame {
         getContentPane().add(btnvender, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 640, 149, -1));
 
         btnenviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOmAIL.png"))); // NOI18N
+        btnenviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnenviarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnenviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 660, 143, -1));
 
         excel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOexcel.png"))); // NOI18N
@@ -229,7 +256,7 @@ public class VentanaVender extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tabla2);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 370, 340, 220));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, 340, 220));
 
         jLabel2.setText("factura:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, -1, -1));
@@ -243,24 +270,32 @@ public class VentanaVender extends javax.swing.JFrame {
         getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, -1, -1));
         getContentPane().add(txttipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 196, -1));
 
-        jLabel3.setText("tipo");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
-
-        jLabel1.setText("Factura para cliente:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, -1, -1));
-
-        botonCliente.setText("clientes");
-        botonCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonClienteActionPerformed(evt);
-            }
-        });
-        getContentPane().add(botonCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, -1, -1));
-        getContentPane().add(txtclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, 191, -1));
+        jLabel5.setText("Desde");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/restoVentanas.png"))); // NOI18N
         jLabel4.setText("jLabel4");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 850, -1));
+
+        jLabel3.setText("tipo");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+
+        jLabel6.setText("Destinatario");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, -1, -1));
+
+        jLabel7.setText("Asunto");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
+
+        desde.setText("stockwarehouse2017@gmail.com");
+        getContentPane().add(desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, -1, -1));
+        getContentPane().add(destinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 110, -1));
+        getContentPane().add(asunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 100, -1));
+
+        txt.setColumns(20);
+        txt.setRows(5);
+        jScrollPane2.setViewportView(txt);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -302,9 +337,22 @@ public class VentanaVender extends javax.swing.JFrame {
       filtrarstock(tipo);
     }//GEN-LAST:event_buscarActionPerformed
 
-    private void botonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteActionPerformed
-         
-    }//GEN-LAST:event_botonClienteActionPerformed
+    private void btnenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnenviarActionPerformed
+    
+        JTextField Jpassword = new JPasswordField();//se crea un JPassword
+Object[] ob = {Jpassword};                      //se crea un objeto para contener el JPassword
+           
+//se crea una ventana de dialogo para introducir la contraseña
+int result = JOptionPane.showConfirmDialog(null, ob, "Ingrese su contraseña", JOptionPane.OK_CANCEL_OPTION);
+//si se presiono aceptar
+if (result == JOptionPane.OK_OPTION) {
+//crea instancia para enviar email, pasandole los parametros.
+    int tabla2;
+  // tabla2.getValueAt(tabla2.getSelectedRow(), 0);
+                EnviaEmail enviaEmail = new EnviaEmail(desde.getText(), Jpassword.getText(),destinatario.getText(), asunto.getText(),txt.setText(Integer.toString(tabla2.getValueAt(tabla2.getSelectedRow(), 0))));
+}//fin si
+       
+    }//GEN-LAST:event_btnenviarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,20 +390,25 @@ public class VentanaVender extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonCliente;
+    private javax.swing.JTextField asunto;
     private javax.swing.JButton btnenviar;
     private javax.swing.JButton btnvender;
     private javax.swing.JButton buscar;
+    private javax.swing.JTextField desde;
+    private javax.swing.JTextField destinatario;
     private javax.swing.JButton excel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tabla;
     private javax.swing.JTable tabla2;
-    private javax.swing.JTextField txtclientes;
+    private javax.swing.JTextArea txt;
     private javax.swing.JTextField txttipo;
     // End of variables declaration//GEN-END:variables
   conectar cc= new conectar();
