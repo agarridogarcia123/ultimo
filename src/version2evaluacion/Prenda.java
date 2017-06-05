@@ -1,5 +1,5 @@
 
-package stockw;
+package version2evaluacion;
 
 import java.io.File;
 import java.io.FileNotFoundException;

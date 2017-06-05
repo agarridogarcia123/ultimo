@@ -42,7 +42,7 @@ public class VentanaModificar extends javax.swing.JFrame {
     String sql="";
     if(valor.equals(""))
     {
-        sql="SELECT * FROM prendas";
+        sql="SELECT * FROM prendas ORDER BY referencia";
     }
     else{
         sql="SELECT * FROM prendas WHERE referencia='"+valor+"'";
@@ -64,7 +64,7 @@ public class VentanaModificar extends javax.swing.JFrame {
             }
             tabla.setModel(modelo);
         } catch (SQLException ex) {
-            Logger.getLogger(basedatosColeccion1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StockW.class.getName()).log(Level.SEVERE, null, ex);
         }
      }
 
@@ -77,42 +77,50 @@ public class VentanaModificar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txttipo = new javax.swing.JTextField();
-        txtref = new javax.swing.JTextField();
-        txtprecio = new javax.swing.JTextField();
-        txtunidades = new javax.swing.JTextField();
-        talla = new javax.swing.JComboBox();
+        actualizar = new javax.swing.JButton();
+        borrar = new javax.swing.JButton();
+        btngrabar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        btngrabar = new javax.swing.JButton();
-        borrar = new javax.swing.JButton();
-        actualizar = new javax.swing.JButton();
+        txtprecio = new javax.swing.JTextField();
+        txtunidades = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        talla = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        txtref = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txttipo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("StockWarehouse");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EtTipo.png"))); // NOI18N
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/etRef.png"))); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/etTalla.png"))); // NOI18N
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/etUnidades.png"))); // NOI18N
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/etPrecio.png"))); // NOI18N
-
-        txttipo.addActionListener(new java.awt.event.ActionListener() {
+        actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOActualizar.png"))); // NOI18N
+        actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txttipoActionPerformed(evt);
+                actualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 470, 146, -1));
 
-        talla.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "XS", "S", "M", "L", "XL" }));
+        borrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bObORRAR.png"))); // NOI18N
+        borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(borrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 145, -1));
+
+        btngrabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BoGrabar.png"))); // NOI18N
+        btngrabar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btngrabarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btngrabar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 146, -1));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -124,133 +132,51 @@ public class VentanaModificar extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        btngrabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BoGrabar.png"))); // NOI18N
-        btngrabar.addActionListener(new java.awt.event.ActionListener() {
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 700, 610, 110));
+        getContentPane().add(txtprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 600, 210, -1));
+        getContentPane().add(txtunidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, 200, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/etPrecio.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, -1, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/etUnidades.png"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
+
+        talla.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "XS", "S", "M", "L", "XL" }));
+        getContentPane().add(talla, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, 210, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/etTalla.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
+        getContentPane().add(txtref, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 200, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/etRef.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
+
+        txttipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btngrabarActionPerformed(evt);
+                txttipoActionPerformed(evt);
             }
         });
+        getContentPane().add(txttipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 181, -1));
 
-        borrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bObORRAR.png"))); // NOI18N
-        borrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                borrarActionPerformed(evt);
-            }
-        });
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EtTipo.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
-        actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOActualizar.png"))); // NOI18N
-        actualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(69, 69, 69)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtprecio)
-                            .addComponent(txtunidades)
-                            .addComponent(txtref)
-                            .addComponent(talla, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txttipo, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
-                        .addGap(76, 76, 76))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btngrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(txttipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(txtref, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(talla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(txtunidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(117, 117, 117)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(actualizar)
-                    .addComponent(borrar)
-                    .addComponent(btngrabar))
-                .addGap(95, 95, 95)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 39, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/restoVentanas.png"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
         try {
-            PreparedStatement pst = cn.prepareStatement("UPDATE prendas SET tipo='"+txttipo.getText()+"',referencia='"+txtref.getText()+"',unidades='"+txtunidades.getText()+"',precio='"+txtprecio.getText()+"' WHERE referencia='"+txtref.getText()+"'");
+            PreparedStatement pst = cn.prepareStatement("UPDATE prendas SET tipo='"+txttipo.getText()+"',referencia='"+txtref.getText()+"',unidades='"+txtunidades.getText()+"',talla='"+talla.getSelectedItem().toString()+"',precio='"+txtprecio.getText()+"' WHERE referencia='"+txtref.getText()+"'");
             pst.executeUpdate();
             mostrarstock("");
+            txttipo.setText("");
+            txtref.setText("");
+            txtunidades.setText("");
+            txtprecio.setText("");
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }
@@ -274,7 +200,7 @@ public class VentanaModificar extends javax.swing.JFrame {
         try {
             PreparedStatement pst = cn.prepareStatement("INSERT INTO prendas VALUES (?,?,?,?,?)");
             pst.setString(1, txttipo.getText().toLowerCase());
-            pst.setString(2, txtref.getText());
+            pst.setString(2, txtref.getText().toLowerCase());
             pst.setString(3, talla.getSelectedItem().toString());
             pst.setInt(4,Integer.parseInt(txtunidades.getText()));
             pst.setFloat(5,Float.parseFloat(txtprecio.getText()));
@@ -336,8 +262,8 @@ public class VentanaModificar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JComboBox talla;

@@ -43,7 +43,8 @@ void mostrarstock(String valor){
         sql="SELECT * FROM clientes";
     }
     else{
-        sql="SELECT * FROM clientes WHERE cif='"+valor+"'";
+        //sql="SELECT * FROM clientes WHERE cif='"+valor+"'";
+       sql= "SELECT * FROM clientes where empresa like '%"+valor+"%'";
     }
     
     
@@ -52,17 +53,17 @@ void mostrarstock(String valor){
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
-                datos [0]=rs.getString(1);
-                datos[1]=rs.getString(2);
-                datos[2]=rs.getString(3);
-                datos[3]=rs.getString(4);
-                datos[4]=rs.getString(5);
+                datos [0]=rs.getString(1).toLowerCase();
+                datos[1]=rs.getString(2).toLowerCase();
+                datos[2]=rs.getString(3).toLowerCase();
+                datos[3]=rs.getString(4).toLowerCase();
+                datos[4]=rs.getString(5).toLowerCase();
                 
                 modelo.addRow(datos);
             }
             tabla.setModel(modelo);
         } catch (SQLException ex) {
-            Logger.getLogger(basedatosColeccion1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StockW.class.getName()).log(Level.SEVERE, null, ex);
         }
         
 }
@@ -92,8 +93,10 @@ void mostrarstock(String valor){
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         borrar = new javax.swing.JButton();
+        actualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("StockWarehouse");
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,6 +141,13 @@ void mostrarstock(String valor){
             }
         });
 
+        actualizar.setText("actualizar");
+        actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,14 +174,19 @@ void mostrarstock(String valor){
                         .addGap(35, 35, 35)
                         .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(añadir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buscaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(actualizar)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(añadir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buscaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41))))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(163, 163, 163)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,11 +230,16 @@ void mostrarstock(String valor){
                             .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addComponent(borrar))))
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtpago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtpago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(actualizar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87))
         );
@@ -266,6 +286,17 @@ void mostrarstock(String valor){
         }
     }//GEN-LAST:event_borrarActionPerformed
 
+    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
+        // TODO add your handling code here:
+         try {
+            PreparedStatement pst = cn.prepareStatement("UPDATE clientes SET empresa='"+txtempresa.getText()+"',cif='"+txtcif.getText()+"',email='"+txtemail.getText()+"',telefono='"+txttelefono.getText()+"',pago='"+txtpago.getText()+"' WHERE cif='"+txtcif.getText()+"'");
+            pst.executeUpdate();
+            mostrarstock("");
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+    }//GEN-LAST:event_actualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -302,6 +333,7 @@ void mostrarstock(String valor){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton actualizar;
     private javax.swing.JButton añadir;
     private javax.swing.JButton borrar;
     private javax.swing.JButton buscaClientes;

@@ -5,8 +5,7 @@
  */
 package stockw;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,7 +73,7 @@ public class VentanaVender extends javax.swing.JFrame {
             }
             tabla.setModel(modelo);
         } catch (SQLException ex) {
-            Logger.getLogger(basedatosColeccion1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StockW.class.getName()).log(Level.SEVERE, null, ex);
         }
     
     }
@@ -111,7 +110,7 @@ public class VentanaVender extends javax.swing.JFrame {
             }
             tabla.setModel(modelo);
         } catch (SQLException ex) {
-            Logger.getLogger(basedatosColeccion1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StockW.class.getName()).log(Level.SEVERE, null, ex);
         }
     
     }
@@ -121,6 +120,7 @@ public class VentanaVender extends javax.swing.JFrame {
     venta.addColumn("Talla");
     venta.addColumn("Unidades");
     venta.addColumn("Precio");
+    
     tabla2.setModel(venta);
  }
  void mostrarventa(String referencia, int unidades){
@@ -151,10 +151,12 @@ public class VentanaVender extends javax.swing.JFrame {
            
             
         } catch (SQLException ex) {
-            Logger.getLogger(basedatosColeccion1.class.getName()).log(Level.SEVERE, null, ex);
+            
+            Logger.getLogger(StockW.class.getName()).log(Level.SEVERE, null, ex);
         }
     
     }
+ 
  
  
 //    /**
@@ -166,20 +168,44 @@ public class VentanaVender extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabla = new javax.swing.JTable();
         btnvender = new javax.swing.JButton();
         btnenviar = new javax.swing.JButton();
         excel = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla2 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txttipo = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
+        txttipo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        botonCliente = new javax.swing.JButton();
+        txtclientes = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("StockWarehouse");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnvender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boVender.png"))); // NOI18N
+        btnvender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvenderActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnvender, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 640, 149, -1));
+
+        btnenviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOmAIL.png"))); // NOI18N
+        getContentPane().add(btnenviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 660, 143, -1));
+
+        excel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOexcel.png"))); // NOI18N
+        excel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(excel, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 660, 147, -1));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -191,21 +217,7 @@ public class VentanaVender extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        btnvender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boVender.png"))); // NOI18N
-        btnvender.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnvenderActionPerformed(evt);
-            }
-        });
-
-        btnenviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOmAIL.png"))); // NOI18N
-
-        excel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOexcel.png"))); // NOI18N
-        excel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                excelActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 360, 220));
 
         tabla2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -217,9 +229,10 @@ public class VentanaVender extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tabla2);
 
-        jLabel2.setText("factura:");
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 370, 340, 220));
 
-        jLabel3.setText("tipo");
+        jLabel2.setText("factura:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, -1, -1));
 
         buscar.setText("Buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -227,68 +240,27 @@ public class VentanaVender extends javax.swing.JFrame {
                 buscarActionPerformed(evt);
             }
         });
+        getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, -1, -1));
+        getContentPane().add(txttipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 196, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnenviar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(excel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnvender, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buscar)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txttipo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
-                .addGap(35, 35, 35))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txttipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82)
-                .addComponent(buscar)
-                .addGap(37, 37, 37)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnenviar)
-                    .addComponent(excel)
-                    .addComponent(btnvender))
-                .addContainerGap(39, Short.MAX_VALUE))
-        );
+        jLabel3.setText("tipo");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabel1.setText("Factura para cliente:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, -1, -1));
+
+        botonCliente.setText("clientes");
+        botonCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonClienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, -1, -1));
+        getContentPane().add(txtclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, 191, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/restoVentanas.png"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -311,7 +283,8 @@ public class VentanaVender extends javax.swing.JFrame {
         try {
             
            PreparedStatement pst = cn.prepareStatement("UPDATE prendas SET unidades ==unidades-"+unid+ " where referencia=='"+referencia+"'");
-            pst.executeUpdate();
+          
+           pst.executeUpdate();
             mostrarstock("");
             mostrarventa(referencia,unid);
         }catch (Exception e) {
@@ -322,14 +295,16 @@ public class VentanaVender extends javax.swing.JFrame {
     private void excelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excelActionPerformed
    
 
-
-
     }//GEN-LAST:event_excelActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
       String tipo=txttipo.getText().toLowerCase();
       filtrarstock(tipo);
     }//GEN-LAST:event_buscarActionPerformed
+
+    private void botonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteActionPerformed
+         
+    }//GEN-LAST:event_botonClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,17 +342,20 @@ public class VentanaVender extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonCliente;
     private javax.swing.JButton btnenviar;
     private javax.swing.JButton btnvender;
     private javax.swing.JButton buscar;
     private javax.swing.JButton excel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tabla;
     private javax.swing.JTable tabla2;
+    private javax.swing.JTextField txtclientes;
     private javax.swing.JTextField txttipo;
     // End of variables declaration//GEN-END:variables
   conectar cc= new conectar();
