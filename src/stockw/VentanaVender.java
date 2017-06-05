@@ -349,7 +349,7 @@ if (result == JOptionPane.OK_OPTION) {
 //crea instancia para enviar email, pasandole los parametros.
     int tabla2;
   // tabla2.getValueAt(tabla2.getSelectedRow(), 0);
-                EnviaEmail enviaEmail = new EnviaEmail(desde.getText(), Jpassword.getText(),destinatario.getText(), asunto.getText(),txt.setText(Integer.toString(tabla2.getValueAt(tabla2.getSelectedRow(), 0))));
+     //           EnviaEmail enviaEmail = new EnviaEmail(desde.getText(), Jpassword.getText(),destinatario.getText(), asunto.getText(),txt.setText(Integer.toString(tabla2.getValueAt(tabla2.getSelectedRow(), 0))));
 }//fin si
        
     }//GEN-LAST:event_btnenviarActionPerformed
