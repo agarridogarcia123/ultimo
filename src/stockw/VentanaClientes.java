@@ -293,6 +293,11 @@ void mostrarstock(String valor){
             PreparedStatement pst = cn.prepareStatement("UPDATE clientes SET empresa='"+txtempresa.getText()+"',cif='"+txtcif.getText()+"',email='"+txtemail.getText()+"',telefono='"+txttelefono.getText()+"',pago='"+txtpago.getText()+"' WHERE cif='"+txtcif.getText()+"'");
             pst.executeUpdate();
             mostrarstock("");
+            txtempresa.setText("");
+            txtcif.setText("");
+            txtpago.setText("");
+            txtemail.setText("");
+            txttelefono.setText("");
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }

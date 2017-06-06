@@ -338,7 +338,7 @@ public class VentanaVender extends javax.swing.JFrame {
   //metodo para gardar a tabla das facturas na BD
         try {
      for(int i=0; i<tabla2.getRowCount();i++){
-        PreparedStatement pst = cn.prepareStatement("INSERT INTO facturas(tipo, referencia, talla, unidades, precio) VALUES (?,?,?,?,?)");
+        PreparedStatement pst = cn.prepareStatement("INSERT INTO ventas(tipo, referencia, talla, unidades, precio) VALUES (?,?,?,?,?)");
             pst.setString(1,tabla2.getValueAt(i,0).toString());
             pst.setString(2,tabla2.getValueAt(i,1).toString());
             pst.setString(3,tabla2.getValueAt(i,2).toString());
@@ -373,13 +373,7 @@ public class VentanaVender extends javax.swing.JFrame {
     this.txt.append(tabla2.getValueAt(fila,3).toString()+"   ,");
     this.txt.append(tabla2.getValueAt(fila,4).toString()+"   \n");
     }
-            try {
-                //crea instancia para enviar email, pasandolle os parámetros
-                PreparedStatement pst1 = cn.prepareStatement("select email from clientes");
-                pst1.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(VentanaVender.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
      EnviaEmail enviaEmail = new EnviaEmail(desde.getText(), Jpassword.getText(),destinatario.getText(), asunto.getText(),txt.getText());
     }//fin si
        
