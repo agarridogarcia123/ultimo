@@ -6,33 +6,32 @@
 package stockw;
 
 
+
+
+import email.EnviaEmail;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import jxl.write.biff.File;
+
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.*;
+import static javafx.scene.input.DataFormat.HTML;
+import javafx.scene.shape.Path;
+import javax.swing.JFileChooser;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.table.TableModel;
+
+import javax.swing.JTable;
+import javax.swing.text.html.HTML;
 
 /**
  *
@@ -53,7 +52,8 @@ public class VentanaVender extends javax.swing.JFrame {
        this.dispose();
  
     }
-  
+    
+   
  void mostrarstock(String valor){
     DefaultTableModel modelo= new DefaultTableModel();
     modelo.addColumn("Tipo");
@@ -176,6 +176,7 @@ public class VentanaVender extends javax.swing.JFrame {
  
  
  
+ 
 //    /**
 //     * This method is called from within the constructor to initialize the form.
 //     * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,24 +188,24 @@ public class VentanaVender extends javax.swing.JFrame {
 
         btnvender = new javax.swing.JButton();
         btnenviar = new javax.swing.JButton();
-        excel = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla2 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         buscar = new javax.swing.JButton();
-        txttipo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        txttipo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        desde = new javax.swing.JTextField();
-        destinatario = new javax.swing.JTextField();
         asunto = new javax.swing.JTextField();
+        destinatario = new javax.swing.JTextField();
+        desde = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txt = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StockWarehouse");
@@ -216,7 +217,7 @@ public class VentanaVender extends javax.swing.JFrame {
                 btnvenderActionPerformed(evt);
             }
         });
-        getContentPane().add(btnvender, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 640, 149, -1));
+        getContentPane().add(btnvender, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 740, 150, 80));
 
         btnenviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOmAIL.png"))); // NOI18N
         btnenviar.addActionListener(new java.awt.event.ActionListener() {
@@ -224,15 +225,7 @@ public class VentanaVender extends javax.swing.JFrame {
                 btnenviarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnenviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 660, 143, -1));
-
-        excel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOexcel.png"))); // NOI18N
-        excel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                excelActionPerformed(evt);
-            }
-        });
-        getContentPane().add(excel, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 660, 147, -1));
+        getContentPane().add(btnenviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 740, 143, 80));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -244,7 +237,7 @@ public class VentanaVender extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 360, 220));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 360, 220));
 
         tabla2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -256,46 +249,55 @@ public class VentanaVender extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tabla2);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, 340, 220));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, 340, 220));
 
-        jLabel2.setText("factura:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Factura:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, -1, -1));
 
-        buscar.setText("Buscar");
+        buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscarletras.png"))); // NOI18N
         buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarActionPerformed(evt);
             }
         });
-        getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, -1, -1));
-        getContentPane().add(txttipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 196, -1));
+        getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 120, 100));
 
-        jLabel5.setText("Desde");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Desde:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, -1, -1));
+        getContentPane().add(txttipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 196, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/restoVentanas.png"))); // NOI18N
-        jLabel4.setText("jLabel4");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 850, -1));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EtTipo.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
-        jLabel3.setText("tipo");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
-
-        jLabel6.setText("Destinatario");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, -1, -1));
-
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("Asunto");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, -1, -1));
+        getContentPane().add(asunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 300, 230, -1));
+
+        destinatario.setText("ara.agg@gmail.com");
+        getContentPane().add(destinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 230, -1));
 
         desde.setText("stockwarehouse2017@gmail.com");
-        getContentPane().add(desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, -1, -1));
-        getContentPane().add(destinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 110, -1));
-        getContentPane().add(asunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 100, -1));
+        getContentPane().add(desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, 230, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("Destinatario");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, -1, -1));
 
         txt.setColumns(20);
         txt.setRows(5);
         jScrollPane2.setViewportView(txt);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 650, 340, 60));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/restoVentanas.png"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 850, -1));
+
+        jButton1.setText("jButton1");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 610, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -327,30 +329,59 @@ public class VentanaVender extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnvenderActionPerformed
 
-    private void excelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excelActionPerformed
-   
-
-    }//GEN-LAST:event_excelActionPerformed
-
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
       String tipo=txttipo.getText().toLowerCase();
       filtrarstock(tipo);
     }//GEN-LAST:event_buscarActionPerformed
 
     private void btnenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnenviarActionPerformed
-    
-        JTextField Jpassword = new JPasswordField();//se crea un JPassword
-Object[] ob = {Jpassword};                      //se crea un objeto para contener el JPassword
+  //metodo para gardar a tabla das facturas na BD
+        try {
+     for(int i=0; i<tabla2.getRowCount();i++){
+        PreparedStatement pst = cn.prepareStatement("INSERT INTO facturas(tipo, referencia, talla, unidades, precio) VALUES (?,?,?,?,?)");
+            pst.setString(1,tabla2.getValueAt(i,0).toString());
+            pst.setString(2,tabla2.getValueAt(i,1).toString());
+            pst.setString(3,tabla2.getValueAt(i,2).toString());
+            pst.setString(4,tabla2.getValueAt(i,3).toString());
+            pst.setString(5,tabla2.getValueAt(i,4).toString());
+            pst.executeUpdate();
+     }
+            } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+     //encher combobox con emails de clientes
+     
+    //metodo para enviar email      
+    JTextField Jpassword = new JPasswordField();//creamos JPassword
+    Object[] ob = {Jpassword}; //obxeto para meter o JPassword
            
-//se crea una ventana de dialogo para introducir la contraseña
-int result = JOptionPane.showConfirmDialog(null, ob, "Ingrese su contraseña", JOptionPane.OK_CANCEL_OPTION);
-//si se presiono aceptar
-if (result == JOptionPane.OK_OPTION) {
-//crea instancia para enviar email, pasandole los parametros.
-    int tabla2;
-  // tabla2.getValueAt(tabla2.getSelectedRow(), 0);
-     //           EnviaEmail enviaEmail = new EnviaEmail(desde.getText(), Jpassword.getText(),destinatario.getText(), asunto.getText(),txt.setText(Integer.toString(tabla2.getValueAt(tabla2.getSelectedRow(), 0))));
-}//fin si
+    int result = JOptionPane.showConfirmDialog(null, ob, "Ingrese su contraseña", JOptionPane.OK_CANCEL_OPTION);
+    if (result == JOptionPane.OK_OPTION) {
+     TableModel model = tabla2.getModel(); 
+           
+    this.txt.setText("Aquí tienes tu factura: \n");
+    this.txt.append(tabla2.getColumnName(0)+"    | ");
+    this.txt.append(tabla2.getColumnName(1)+"  | ");
+    this.txt.append(tabla2.getColumnName(2)+"    | ");
+    this.txt.append(tabla2.getColumnName(3)+"    | ");
+    this.txt.append(tabla2.getColumnName(4)+"    | \n");
+    for(int fila=0;fila<model.getRowCount();fila++){
+
+    this.txt.append(tabla2.getValueAt(fila,0).toString()+" ,");
+    this.txt.append(tabla2.getValueAt(fila,1).toString()+"   ,");
+    this.txt.append(tabla2.getValueAt(fila,2).toString()+"   ,");
+    this.txt.append(tabla2.getValueAt(fila,3).toString()+"   ,");
+    this.txt.append(tabla2.getValueAt(fila,4).toString()+"   \n");
+    }
+            try {
+                //crea instancia para enviar email, pasandolle os parámetros
+                PreparedStatement pst1 = cn.prepareStatement("select email from clientes");
+                pst1.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaVender.class.getName()).log(Level.SEVERE, null, ex);
+            }
+     EnviaEmail enviaEmail = new EnviaEmail(desde.getText(), Jpassword.getText(),destinatario.getText(), asunto.getText(),txt.getText());
+    }//fin si
        
     }//GEN-LAST:event_btnenviarActionPerformed
 
@@ -396,7 +427,7 @@ if (result == JOptionPane.OK_OPTION) {
     private javax.swing.JButton buscar;
     private javax.swing.JTextField desde;
     private javax.swing.JTextField destinatario;
-    private javax.swing.JButton excel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

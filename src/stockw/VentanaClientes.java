@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Araceli
+ * @author Marta
  */
 public class VentanaClientes extends javax.swing.JFrame {
 conectar cc= new conectar();
@@ -287,7 +288,7 @@ void mostrarstock(String valor){
     }//GEN-LAST:event_borrarActionPerformed
 
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
-        // TODO add your handling code here:
+       
          try {
             PreparedStatement pst = cn.prepareStatement("UPDATE clientes SET empresa='"+txtempresa.getText()+"',cif='"+txtcif.getText()+"',email='"+txtemail.getText()+"',telefono='"+txttelefono.getText()+"',pago='"+txtpago.getText()+"' WHERE cif='"+txtcif.getText()+"'");
             pst.executeUpdate();

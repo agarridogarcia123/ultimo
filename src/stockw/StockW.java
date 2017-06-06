@@ -8,6 +8,7 @@ package stockw;
 /**
  *
  * @author Araceli
+ * @author Marta
  */
 public class StockW {
 

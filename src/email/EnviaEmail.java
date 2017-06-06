@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 
-package stockw;
+package email;
 
-    import java.util.*;
+import stockw.*;
+import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.swing.JOptionPane;   
 /**
  *
- * @author chisco
+ * @author Araceli, Marta
  */
 public class EnviaEmail {
       String miCorreo;
@@ -22,47 +23,47 @@ public class EnviaEmail {
         String mailReceptor;
         String asunto;
         String cuerpo;
-        //metodo que recibe y envia el email
+        
         public EnviaEmail(String miCorreo, String miContraseña, String mailReceptor, String asunto, String cuerpo) {
             this.miCorreo = miCorreo;
             this.miContraseña = miContraseña;
             this.mailReceptor = mailReceptor;
             this.asunto = asunto;
             this.cuerpo = cuerpo;
-            Properties props = new Properties();//propiedades a agragar
+            Properties props = new Properties();
             props.put("mail.smtp.user", this.miCorreo);//correo origen
             props.put("mail.smtp.host", servidorSMTP);//tipo de servidor
             props.put("mail.smtp.port", puertoEnvio);//puesto de salida
-            props.put("mail.smtp.starttls.enable", "true");//inicializar el servidor
+            props.put("mail.smtp.starttls.enable", "true");//inicializar o servidor
             props.put("mail.smtp.auth", "true");//autentificacion
-            props.put("mail.smtp.socketFactory.port", puertoEnvio);//activar el puerto
+            props.put("mail.smtp.socketFactory.port", puertoEnvio);//activar o puerto
             props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
             props.put("mail.smtp.socketFactory.fallback", "false");
             SecurityManager security = System.getSecurityManager();
             try {
-                   Authenticator auth = new autentificadorSMTP();//autentificar el correo
-            Session session = Session.getInstance(props, auth);//se inica una session
-            // session.setDebug(true);
+                   Authenticator auth = new autentificadorSMTP();//autentificar o correo
+            Session session = Session.getInstance(props, auth);//iniciamos sesion
+           
 
-            MimeMessage msg = new MimeMessage(session);//se crea un objeto donde ira la estructura del correo
-            msg.setText(cuerpo);//seteo el cuertpo del mensaje
-            msg.setSubject(asunto);//setea asusto (opcional)
-            msg.setFrom(new InternetAddress(miCorreo));//agrega la la propiedad del correo origen
+            MimeMessage msg = new MimeMessage(session);//estructura do correo
+            msg.setText(cuerpo);//corpo da mensaxe
+            msg.setSubject(asunto);//asunto
+            msg.addHeaderLine("Muchas gracias por confiar en STOCK WAREHOUSE");
+            msg.setFrom(new InternetAddress(miCorreo));//agrega a propiedade do correo origen
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-                    mailReceptor));//agrega el destinatario
-            Transport.send(msg);//envia el mensaje
+                    mailReceptor));//agrega  destinatario
+            Transport.send(msg);//envia mensaxe
              JOptionPane.showMessageDialog(null, "Email enviado");
                 
               
-            } catch (Exception mex) {//en caso de que ocurra un error se crea una excepcion
-                JOptionPane.showMessageDialog(null, "Email no enviado");//muestra con cuadro de dialogo un mensaje que correo no fue enviado
-          
-            }//fin try-catch
-        }//fin metodo enviaEmail
+            } catch (Exception mex) {
+                JOptionPane.showMessageDialog(null, "Email no enviado");
+            }
+        }
         private class autentificadorSMTP extends javax.mail.Authenticator {
-           // @Override
+          
             public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(miCorreo, miContraseña);//autentifica tanto el correo como la contraseña
+                return new PasswordAuthentication(miCorreo, miContraseña);//autentifica correo e contrasinal
             }
         }
 }
