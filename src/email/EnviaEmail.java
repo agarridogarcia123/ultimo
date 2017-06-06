@@ -48,7 +48,8 @@ public class EnviaEmail {
             MimeMessage msg = new MimeMessage(session);//estructura do correo
             msg.setText(cuerpo);//corpo da mensaxe
             msg.setSubject(asunto);//asunto
-            msg.addHeaderLine("Muchas gracias por confiar en STOCK WAREHOUSE");
+            msg.addHeaderLine("Muchas gracias por confiar en STOCK WAREHOUSE");//encabezado
+            
             msg.setFrom(new InternetAddress(miCorreo));//agrega a propiedade do correo origen
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
                     mailReceptor));//agrega  destinatario

@@ -205,7 +205,6 @@ public class VentanaVender extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txt = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StockWarehouse");
@@ -298,10 +297,7 @@ public class VentanaVender extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/restoVentanas.png"))); // NOI18N
         jLabel4.setText("jLabel4");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 850, -1));
-
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 610, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -364,17 +360,13 @@ public class VentanaVender extends javax.swing.JFrame {
      TableModel model = tabla2.getModel(); 
            
     this.txt.setText("Productos: \n" );
-    this.txt.append(tabla2.getColumnName(0)+"    | ");
-    this.txt.append(tabla2.getColumnName(1)+"  | ");
-    this.txt.append(tabla2.getColumnName(2)+"    | ");
-    this.txt.append(tabla2.getColumnName(3)+"    | ");
-    this.txt.append(tabla2.getColumnName(4)+"    | \n");
+  
     for(int fila=0;fila<model.getRowCount();fila++){
 
     this.txt.append(tabla2.getValueAt(fila,0).toString()+"   Ref:");
     this.txt.append(tabla2.getValueAt(fila,1).toString()+"    Talla:");
     this.txt.append(tabla2.getValueAt(fila,2).toString()+"    Unidades:");
-    this.txt.append(tabla2.getValueAt(fila,3).toString()+"    Precio:");
+    this.txt.append(tabla2.getValueAt(fila,3).toString()+"    Precio/Unidad:");
     this.txt.append(tabla2.getValueAt(fila,4).toString()+"   \n");
     }
            
@@ -424,7 +416,6 @@ public class VentanaVender extends javax.swing.JFrame {
     private javax.swing.JButton buscar;
     private javax.swing.JTextField desde;
     private javax.swing.JTextField destinatario;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
