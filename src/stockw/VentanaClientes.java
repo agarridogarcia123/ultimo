@@ -81,7 +81,6 @@ void mostrarstock(String valor){
         tabla = new javax.swing.JTable();
         buscaClientes = new javax.swing.JButton();
         txtbuscar = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         txtempresa = new javax.swing.JTextField();
         txtpago = new javax.swing.JTextField();
         txtcif = new javax.swing.JTextField();
@@ -91,11 +90,13 @@ void mostrarstock(String valor){
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         borrar = new javax.swing.JButton();
         actualizar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StockWarehouse");
@@ -119,22 +120,25 @@ void mostrarstock(String valor){
                 buscaClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(buscaClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 250, 127, 112));
-        getContentPane().add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 155, -1));
+        getContentPane().add(buscaClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 180, 127, 112));
+        getContentPane().add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 155, -1));
 
-        jLabel1.setText("Nombre empresa:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, -1, -1));
-        getContentPane().add(txtempresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 87, -1));
+        txtempresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtempresaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtempresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 150, -1));
 
         txtpago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtpagoActionPerformed(evt);
             }
         });
-        getContentPane().add(txtpago, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, 184, 30));
-        getContentPane().add(txtcif, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 87, -1));
-        getContentPane().add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 87, -1));
-        getContentPane().add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 87, -1));
+        getContentPane().add(txtpago, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 150, 30));
+        getContentPane().add(txtcif, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 150, -1));
+        getContentPane().add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 150, -1));
+        getContentPane().add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 150, -1));
 
         añadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BoGrabar.png"))); // NOI18N
         añadir.addActionListener(new java.awt.event.ActionListener() {
@@ -142,22 +146,27 @@ void mostrarstock(String valor){
                 añadirActionPerformed(evt);
             }
         });
-        getContentPane().add(añadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 490, 150, -1));
+        getContentPane().add(añadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 490, 150, 80));
 
-        jLabel6.setText("pago/dias");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, 20));
+        jLabel6.setFont(new java.awt.Font("Coolvetica Rg", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel6.setText("Pago/dias:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 180, 50));
 
-        jLabel2.setText("Empresa");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Coolvetica Rg", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel2.setText("Empresa:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 110, 40));
 
-        jLabel3.setText("cif");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Coolvetica Rg", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel3.setText("CIF:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 70, 60));
 
-        jLabel5.setText("telefono");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
-
-        jLabel4.setText("email");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
+        jLabel4.setFont(new java.awt.Font("Coolvetica Rg", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel4.setText("Email:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 90, 30));
 
         borrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bObORRAR.png"))); // NOI18N
         borrar.addActionListener(new java.awt.event.ActionListener() {
@@ -175,8 +184,23 @@ void mostrarstock(String valor){
         });
         getContentPane().add(actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 720, 144, 74));
 
+        jLabel8.setFont(new java.awt.Font("Coolvetica Rg", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel8.setText("Teléfono:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Coolvetica Rg", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel5.setText("Empresa:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, -1, -1));
+
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/restoVentanas.png"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, -1));
+
+        jLabel9.setFont(new java.awt.Font("Coolvetica Rg", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel9.setText("Empresa:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 110, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -240,6 +264,10 @@ void mostrarstock(String valor){
         // TODO add your handling code here:
     }//GEN-LAST:event_txtpagoActionPerformed
 
+    private void txtempresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtempresaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtempresaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -280,13 +308,14 @@ void mostrarstock(String valor){
     private javax.swing.JButton añadir;
     private javax.swing.JButton borrar;
     private javax.swing.JButton buscaClientes;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtbuscar;

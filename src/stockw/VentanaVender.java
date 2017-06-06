@@ -136,7 +136,7 @@ public class VentanaVender extends javax.swing.JFrame {
     venta.addColumn("Referencia");
     venta.addColumn("Talla");
     venta.addColumn("Unidades");
-    venta.addColumn("Precio");
+    venta.addColumn("Precio/Unidad");
     
     tabla2.setModel(venta);
  }
@@ -251,7 +251,8 @@ public class VentanaVender extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, 340, 220));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Coolvetica Rg", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 153));
         jLabel2.setText("Factura:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, -1, -1));
 
@@ -263,28 +264,31 @@ public class VentanaVender extends javax.swing.JFrame {
         });
         getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 120, 100));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Coolvetica Rg", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 153, 153));
         jLabel5.setText("Desde:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, -1, -1));
         getContentPane().add(txttipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 196, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EtTipo.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Asunto");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, -1, -1));
-        getContentPane().add(asunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 300, 230, -1));
+        jLabel7.setFont(new java.awt.Font("Coolvetica Rg", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel7.setText("Asunto:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, -1, -1));
+        getContentPane().add(asunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 290, 230, -1));
 
         destinatario.setText("ara.agg@gmail.com");
-        getContentPane().add(destinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 230, -1));
+        getContentPane().add(destinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 250, 190, -1));
 
         desde.setText("stockwarehouse2017@gmail.com");
-        getContentPane().add(desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, 230, -1));
+        getContentPane().add(desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 200, 230, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setText("Destinatario");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, -1, -1));
+        jLabel6.setFont(new java.awt.Font("Coolvetica Rg", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel6.setText("Destinatario:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, -1, -1));
 
         txt.setColumns(20);
         txt.setRows(5);

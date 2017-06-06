@@ -67,7 +67,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         });
         jPanel1.add(vender, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 450, 141, 136));
 
-        clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boClientes.png"))); // NOI18N
+        clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clientess.png"))); // NOI18N
         clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientesActionPerformed(evt);
@@ -76,13 +76,12 @@ public class VentanaInicio extends javax.swing.JFrame {
         jPanel1.add(clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 450, 140, 140));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/portada.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -10, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 830, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/portada.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
