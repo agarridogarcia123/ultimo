@@ -359,7 +359,7 @@ public class VentanaVender extends javax.swing.JFrame {
     if (result == JOptionPane.OK_OPTION) {
      TableModel model = tabla2.getModel(); 
            
-    this.txt.setText("Aquí tienes tu factura: \n");
+    this.txt.setText("Productos: \n" );
     this.txt.append(tabla2.getColumnName(0)+"    | ");
     this.txt.append(tabla2.getColumnName(1)+"  | ");
     this.txt.append(tabla2.getColumnName(2)+"    | ");
@@ -367,16 +367,15 @@ public class VentanaVender extends javax.swing.JFrame {
     this.txt.append(tabla2.getColumnName(4)+"    | \n");
     for(int fila=0;fila<model.getRowCount();fila++){
 
-    this.txt.append(tabla2.getValueAt(fila,0).toString()+" ,");
-    this.txt.append(tabla2.getValueAt(fila,1).toString()+"   ,");
-    this.txt.append(tabla2.getValueAt(fila,2).toString()+"   ,");
-    this.txt.append(tabla2.getValueAt(fila,3).toString()+"   ,");
+    this.txt.append(tabla2.getValueAt(fila,0).toString()+"   Ref:");
+    this.txt.append(tabla2.getValueAt(fila,1).toString()+"    Talla:");
+    this.txt.append(tabla2.getValueAt(fila,2).toString()+"    Unidades:");
+    this.txt.append(tabla2.getValueAt(fila,3).toString()+"    Precio:");
     this.txt.append(tabla2.getValueAt(fila,4).toString()+"   \n");
     }
            
      EnviaEmail enviaEmail = new EnviaEmail(desde.getText(), Jpassword.getText(),destinatario.getText(), asunto.getText(),txt.getText());
-    }//fin si
-       
+    }
     }//GEN-LAST:event_btnenviarActionPerformed
 
     /**
