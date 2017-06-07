@@ -37,7 +37,7 @@ public class VentanaBuscar extends javax.swing.JFrame {
     String sql="";
     if(valor.equals(""))
     {
-        sql="SELECT * FROM prendas";
+        sql="SELECT * FROM prendas order by referencia";
     }
     else{
         sql="SELECT * FROM prendas WHERE referencia='"+valor+"'";

@@ -40,10 +40,13 @@ public class EnviaEmail {
             props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
             props.put("mail.smtp.socketFactory.fallback", "false");
             SecurityManager security = System.getSecurityManager();
-            try {
-                   Authenticator auth = new autentificadorSMTP();//autentificar o correo
-            Session session = Session.getInstance(props, auth);//iniciamos sesion
            
+
+            try {
+              Authenticator auth = new autentificadorSMTP();//autentificar o correo
+            Session session = Session.getInstance(props, auth);//iniciamos sesion
+          
+        
 
             MimeMessage msg = new MimeMessage(session);//estructura do correo
             msg.setText(cuerpo);//corpo da mensaxe
@@ -53,6 +56,7 @@ public class EnviaEmail {
             msg.setFrom(new InternetAddress(miCorreo));//agrega a propiedade do correo orixe
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
                     mailReceptor));//agrega  destinatario
+             
             Transport.send(msg);//envia mensaxe
              JOptionPane.showMessageDialog(null, "Email enviado");
                 

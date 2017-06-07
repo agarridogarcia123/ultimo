@@ -359,7 +359,7 @@ public class VentanaVender extends javax.swing.JFrame {
      TableModel model = tabla2.getModel(); 
            
     //texto que vai no email
-    this.txt.setText("Productos: \n" );
+    this.txt.setText("Confirmación de compra: \n" );
   
     for(int fila=0;fila<model.getRowCount();fila++){
     this.txt.append(tabla2.getValueAt(fila,0).toString()+"   Ref:");
@@ -368,6 +368,7 @@ public class VentanaVender extends javax.swing.JFrame {
     this.txt.append(tabla2.getValueAt(fila,3).toString()+"    Precio/Unidad:");
     this.txt.append(tabla2.getValueAt(fila,4).toString()+" €  \n");
     }
+    this.txt.append(" \n Si no se corresponde con lo que ha pedido por favor póngase en contacto con nosotros, \n Atentamente Stock Warehouse." );
            
      EnviaEmail enviaEmail = new EnviaEmail(desde.getText(), Jpassword.getText(),destinatario.getText(), asunto.getText(),txt.getText());
     }
