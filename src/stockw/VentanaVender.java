@@ -9,6 +9,8 @@ package stockw;
 
 
 import email.EnviaEmail;
+import excel.excel2;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,33 +19,24 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-
-import javax.mail.*;
-import javax.mail.internet.*;
 import java.util.*;
-import static javafx.scene.input.DataFormat.HTML;
-import javafx.scene.shape.Path;
 import javax.swing.JFileChooser;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
-
 import javax.swing.JTable;
-import javax.swing.text.html.HTML;
 
 /**
  *
- * @author chisco
+ * @author Araceli
+ * @author Marta
  */
 public class VentanaVender extends javax.swing.JFrame {
     
      DefaultTableModel venta= new DefaultTableModel();
 
-    /**
-     * Creates new form VentanaVender
-     */
+   
     public VentanaVender() {
        initComponents();
        iniciarTabla();
@@ -92,9 +85,6 @@ public class VentanaVender extends javax.swing.JFrame {
     
     }
  void filtrarstock(String tipo){
-     
-     
- 
     DefaultTableModel modelo= new DefaultTableModel();
     modelo.addColumn("Tipo");
     modelo.addColumn("Referencia");
@@ -204,6 +194,7 @@ public class VentanaVender extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txt = new javax.swing.JTextArea();
+        excel = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -295,15 +286,23 @@ public class VentanaVender extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 650, 340, 60));
 
+        excel.setText("jButton1");
+        excel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(excel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 650, -1, -1));
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/restoVentanas.png"))); // NOI18N
         jLabel4.setText("jLabel4");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 850, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnvenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvenderActionPerformed
-//botón vender por referencia
+     
 
         int fila = tabla.getSelectedRow();
         int unidades;
@@ -359,20 +358,43 @@ public class VentanaVender extends javax.swing.JFrame {
     if (result == JOptionPane.OK_OPTION) {
      TableModel model = tabla2.getModel(); 
            
+    //texto que vai no email
     this.txt.setText("Productos: \n" );
   
     for(int fila=0;fila<model.getRowCount();fila++){
-
     this.txt.append(tabla2.getValueAt(fila,0).toString()+"   Ref:");
     this.txt.append(tabla2.getValueAt(fila,1).toString()+"    Talla:");
     this.txt.append(tabla2.getValueAt(fila,2).toString()+"    Unidades:");
     this.txt.append(tabla2.getValueAt(fila,3).toString()+"    Precio/Unidad:");
-    this.txt.append(tabla2.getValueAt(fila,4).toString()+"   \n");
+    this.txt.append(tabla2.getValueAt(fila,4).toString()+" €  \n");
     }
            
      EnviaEmail enviaEmail = new EnviaEmail(desde.getText(), Jpassword.getText(),destinatario.getText(), asunto.getText(),txt.getText());
     }
     }//GEN-LAST:event_btnenviarActionPerformed
+
+    private void excelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excelActionPerformed
+        JFileChooser dialog = new JFileChooser();
+        int opcion = dialog.showSaveDialog(VentanaVender.this);
+
+        if (opcion == JFileChooser.APPROVE_OPTION) {
+
+            File dir = dialog.getSelectedFile();
+
+            try {
+                List<JTable> tb = new ArrayList<JTable>();
+                tb.add(tabla2);
+                
+                excel2 excelExporter = new excel2 (tb, new File(dir.getAbsolutePath() + ".xls"));
+                if (excelExporter.export()) {
+                    JOptionPane.showMessageDialog(null, "Tablas exportadas!");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+       
+    }//GEN-LAST:event_excelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -416,6 +438,7 @@ public class VentanaVender extends javax.swing.JFrame {
     private javax.swing.JButton buscar;
     private javax.swing.JTextField desde;
     private javax.swing.JTextField destinatario;
+    private javax.swing.JButton excel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -431,5 +454,5 @@ public class VentanaVender extends javax.swing.JFrame {
     private javax.swing.JTextField txttipo;
     // End of variables declaration//GEN-END:variables
   conectar cc= new conectar();
-    Connection cn= cc.conexion();
+  Connection cn= cc.conexion();
 }
