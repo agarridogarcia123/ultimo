@@ -286,13 +286,13 @@ public class VentanaVender extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 650, 340, 60));
 
-        excel.setText("jButton1");
+        excel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BOexcel.png"))); // NOI18N
         excel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 excelActionPerformed(evt);
             }
         });
-        getContentPane().add(excel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 650, -1, -1));
+        getContentPane().add(excel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 740, 140, 80));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/restoVentanas.png"))); // NOI18N
         jLabel4.setText("jLabel4");
@@ -348,7 +348,7 @@ public class VentanaVender extends javax.swing.JFrame {
             } catch (Exception e) {
             System.out.print(e.getMessage());
         }
-     //encher combobox con emails de clientes
+     
      
     //metodo para enviar email      
     JTextField Jpassword = new JPasswordField();//creamos JPassword

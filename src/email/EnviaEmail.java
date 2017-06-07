@@ -31,9 +31,9 @@ public class EnviaEmail {
             this.asunto = asunto;
             this.cuerpo = cuerpo;
             Properties props = new Properties();
-            props.put("mail.smtp.user", this.miCorreo);//correo origen
+            props.put("mail.smtp.user", this.miCorreo);//correo orixe
             props.put("mail.smtp.host", servidorSMTP);//tipo de servidor
-            props.put("mail.smtp.port", puertoEnvio);//puesto de salida
+            props.put("mail.smtp.port", puertoEnvio);//puerto de salida
             props.put("mail.smtp.starttls.enable", "true");//inicializar o servidor
             props.put("mail.smtp.auth", "true");//autentificacion
             props.put("mail.smtp.socketFactory.port", puertoEnvio);//activar o puerto
@@ -50,7 +50,7 @@ public class EnviaEmail {
             msg.setSubject(asunto);//asunto
             msg.addHeaderLine("Muchas gracias por confiar en STOCK WAREHOUSE");//encabezado
             
-            msg.setFrom(new InternetAddress(miCorreo));//agrega a propiedade do correo origen
+            msg.setFrom(new InternetAddress(miCorreo));//agrega a propiedade do correo orixe
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
                     mailReceptor));//agrega  destinatario
             Transport.send(msg);//envia mensaxe

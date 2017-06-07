@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author chisco
+ * @author Araceli
  */
 public class VentanaBuscar extends javax.swing.JFrame {
 

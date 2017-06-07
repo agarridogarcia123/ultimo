@@ -18,7 +18,8 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author chisco
+ * @author Marta
+ * @author Araceli
  */
 public class VentanaModificar extends javax.swing.JFrame {
 

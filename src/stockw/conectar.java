@@ -20,7 +20,7 @@ public class conectar {
           Class.forName("org.sqlite.JDBC");
          // Connection con=DriverManager.getConnection("jdbc:sqlite:F:\\Marta\\ProxectoVersion2\\Stock.sqlite");
           Connection con=DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Araceli\\Documents\\NetBeansProjects\\ProxectoVersion3\\Stock.sqlite");
-          //JOptionPane.showMessageDialog(null,"Conexión establecida");
+         
           return con;
       }  catch(Exception e){
           JOptionPane.showMessageDialog(null, e);

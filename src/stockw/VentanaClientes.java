@@ -44,7 +44,7 @@ void mostrarstock(String valor){
         sql="SELECT * FROM clientes";
     }
     else{
-        //sql="SELECT * FROM clientes WHERE cif='"+valor+"'";
+        
        sql= "SELECT * FROM clientes where empresa like '%"+valor+"%'";
     }
     

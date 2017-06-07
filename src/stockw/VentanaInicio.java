@@ -7,7 +7,7 @@ package stockw;
 
 /**
  *
- * @author chisco
+ * @author Marta, Araceli
  */
 public class VentanaInicio extends javax.swing.JFrame {
 
